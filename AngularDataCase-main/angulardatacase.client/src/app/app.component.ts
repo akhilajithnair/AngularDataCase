@@ -39,7 +39,7 @@ export class AppComponent implements OnInit {
   public selectedGrouping: GroupingResponse | null = null;
   public groupings: GroupingResponse[] = [];
 
-  public selectedAnalytic: AnalyticResponse | null = null;
+  public selectedAnalytic: AnalyticResponse[] = [];
   public analytics: AnalyticResponse[] = [];
   public groupingNodes: NodeResponse[] = [];
   public calculatedAnalytics: CalculateNodeResponse[] = [];
@@ -104,12 +104,31 @@ export class AppComponent implements OnInit {
     );
   }
 
-  onDataSetChange() {
-
+  onDataSetChange(id: string) {
+    this.selectedDataSet = this.dataSets.find(ds => ds.id.toString() === id) || null;
+    console.log('onDataSetChange()', this.selectedDataSet?.displayName);
+    // this.calculate();
   }
 
-  onGroupingChange() {
-    
+  onGroupingChange(id: string) {
+    this.selectedGrouping = this.groupings.find(g => g.id.toString() === id) || null;
+    console.log('onGroupingChange()', this.selectedGrouping?.displayName);
+    // this.calculate();
+  }
+
+  isAnalyticSelected(analytic: AnalyticResponse): boolean {
+    return this.selectedAnalytic.some(a => a.id === analytic.id);
+  }
+
+  onAnalyticsCheckboxSelectChange(analytic: AnalyticResponse) {
+    console.log('onAnalyticsCheckboxSelectChange()', analytic);
+    const index = this.analytics.findIndex(a => a.id === analytic.id);
+    if (index >= 0) 
+      this.selectedAnalytic[index] = analytic;
+    else 
+      this.selectedAnalytic.push(analytic);
+    console.log('Updated Analytics:', this.selectedAnalytic);
+    // this.calculate();
   }
 
   calculate() {
