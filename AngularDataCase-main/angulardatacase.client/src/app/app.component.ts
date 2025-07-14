@@ -32,8 +32,14 @@ interface CalculateNodeResponse {
   styleUrl: './app.component.css'
 })
 export class AppComponent implements OnInit {
+
+  public selectedDataSet: DataSetResponse | null = null;
   public dataSets: DataSetResponse[] = [];
+
+  public selectedGrouping: GroupingResponse | null = null;
   public groupings: GroupingResponse[] = [];
+
+  public selectedAnalytic: AnalyticResponse | null = null;
   public analytics: AnalyticResponse[] = [];
   public groupingNodes: NodeResponse[] = [];
   public calculatedAnalytics: CalculateNodeResponse[] = [];
@@ -52,6 +58,9 @@ export class AppComponent implements OnInit {
     this.http.get<DataSetResponse[]>('/api/data/getdatasets').subscribe(
       (result) => {
         this.dataSets = result;
+        if (this.dataSets.length > 0) {
+          this.selectedDataSet = this.dataSets[0];
+        }
       },
       (error) => {
         console.error(error);
@@ -63,6 +72,9 @@ export class AppComponent implements OnInit {
     this.http.get<GroupingResponse[]>('/api/data/getgroupings').subscribe(
       (result) => {
         this.groupings = result;
+        if (this.groupings.length > 0) {
+          this.selectedGrouping = this.groupings[0];
+        }
       },
       (error) => {
         console.error(error);
@@ -90,6 +102,14 @@ export class AppComponent implements OnInit {
         console.error(error);
       }
     );
+  }
+
+  onDataSetChange() {
+
+  }
+
+  onGroupingChange() {
+    
   }
 
   calculate() {

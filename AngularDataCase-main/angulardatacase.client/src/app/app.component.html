@@ -4,37 +4,19 @@
 
 <p *ngIf="!dataSets"><em>Loading... Please refresh once the ASP.NET backend has started. See <a href="https://aka.ms/jspsintegrationangular">https://aka.ms/jspsintegrationangular</a> for more details.</em></p>
 
-DataSets:
-<table *ngIf="dataSets">
-  <thead>
-    <tr>
-      <th>ID</th>
-      <th>DisplayName</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr *ngFor="let dataSet of dataSets">
-      <td>{{ dataSet.id }}</td>
-      <td>{{ dataSet.displayName }}</td>
-    </tr>
-  </tbody>
-</table>
+<div class="dataset-selector">
+  <label for="dataSetSelect">Select Data Set:</label>
+  <select id="dataSetSelect" [(ngModel)]="selectedDataSet" (change)="onDataSetChange()">
+    <option *ngFor="let dataSet of dataSets" [value]="dataSet">{{ dataSet.displayName }}</option>
+  </select>
+</div>
 
-Groupings:
-<table *ngIf="groupings">
-  <thead>
-    <tr>
-      <th>ID</th>
-      <th>DisplayName</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr *ngFor="let grouping of groupings">
-      <td>{{ grouping.id }}</td>
-      <td>{{ grouping.displayName }}</td>
-    </tr>
-  </tbody>
-</table>
+<div class="grouping-selector">
+  <label for="groupingSelect">Select Grouping:</label>
+  <select id="groupingSelect" [(ngModel)]="selectedGrouping" (change)="onGroupingChange()">
+    <option *ngFor="let grouping of groupings" [value]="grouping">{{ grouping.displayName }}</option>
+  </select> 
+</div>
 
 Analytics:
 <table *ngIf="analytics">
