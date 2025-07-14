@@ -1,0 +1,45 @@
+{
+  "format": 1,
+  "restore": {
+    "/Users/akhilajithnair/NAIR/Development/SimCorp/AngularDataCase/AngularDataCase-main/angulardatacase.client/angulardatacase.client.esproj": {}
+  },
+  "projects": {
+    "/Users/akhilajithnair/NAIR/Development/SimCorp/AngularDataCase/AngularDataCase-main/angulardatacase.client/angulardatacase.client.esproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "/Users/akhilajithnair/NAIR/Development/SimCorp/AngularDataCase/AngularDataCase-main/angulardatacase.client/angulardatacase.client.esproj",
+        "projectName": "angulardatacase.client",
+        "projectPath": "/Users/akhilajithnair/NAIR/Development/SimCorp/AngularDataCase/AngularDataCase-main/angulardatacase.client/angulardatacase.client.esproj",
+        "packagesPath": "/Users/akhilajithnair/.nuget/packages/",
+        "outputPath": "/Users/akhilajithnair/NAIR/Development/SimCorp/AngularDataCase/AngularDataCase-main/angulardatacase.client/obj/",
+        "projectStyle": "PackageReference",
+        "UsingMicrosoftNETSdk": false,
+        "configFilePaths": [
+          "/Users/akhilajithnair/.nuget/NuGet/NuGet.Config"
+        ],
+        "originalTargetFrameworks": [
+          "net6.0"
+        ],
+        "sources": {
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net6.0-none": {
+            "targetAlias": "net6.0",
+            "projectReferences": {}
+          }
+        },
+        "restoreAuditProperties": {
+          "enableAudit": "true",
+          "auditLevel": "low",
+          "auditMode": "direct"
+        }
+      },
+      "frameworks": {
+        "net6.0-none": {
+          "targetAlias": "net6.0"
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,1 @@
+/Users/akhilajithnair/NAIR/Development/SimCorp/AngularDataCase/AngularDataCase-main/angulardatacase.client/obj/Debug/angulardatacase.client.esproj.CoreCompileInputs.cache

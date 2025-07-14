@@ -1,0 +1,14 @@
+{
+  "version": 2,
+  "dgSpecHash": "cygfwSDgiH8=",
+  "success": false,
+  "projectFilePath": "/Users/akhilajithnair/NAIR/Development/SimCorp/AngularDataCase/AngularDataCase-main/angulardatacase.client/angulardatacase.client.esproj",
+  "expectedPackageFiles": [],
+  "logs": [
+    {
+      "code": "NU1012",
+      "level": "Error",
+      "message": "Platform version is not present for one or more target frameworks, even though they have specified a platform: net6.0-none"
+    }
+  ]
+}

@@ -1,0 +1,10 @@
+{
+"SpaProxyServer": {
+"ServerUrl": "https://localhost:59734",
+"RedirectUrl": "",
+"LaunchCommand": "npm start",
+"WorkingDirectory": "/Users/akhilajithnair/NAIR/Development/SimCorp/AngularDataCase/AngularDataCase-main/AngularDataCase.Server/../angulardatacase.client",
+"MaxTimeoutInSeconds": "120",
+"KeepRunning": "false"
+}
+}
