@@ -4,11 +4,38 @@
     text-align: center;
 }
 
+select {
+    margin-left: 10px;
+    font-size: 15px;
+}
+
+div, h1, p {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.grouping-selector-container {
+    margin-top: 10px;
+}
+
+.analytics-checkbox-select-container {
+    margin-top: 10px;
+    margin-bottom: 30px;
+}
+
+.checkbox-select {
+    display: inline-block;
+    margin-right: 10px;
+}
+
 th, td {
-    padding-left: 1rem;
-    padding-right: 1rem;
+    padding: 1rem;
 }
 
 table {
+    border: 1px solid #ccc;
     margin: 0 auto;
+}
+
+.analytics-table {
+    margin-top: 10px;
 }
