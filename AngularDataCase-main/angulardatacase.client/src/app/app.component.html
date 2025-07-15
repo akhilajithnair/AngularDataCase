@@ -4,14 +4,14 @@
 
 <p *ngIf="!dataSets"><em>Loading... Please refresh once the ASP.NET backend has started. See <a href="https://aka.ms/jspsintegrationangular">https://aka.ms/jspsintegrationangular</a> for more details.</em></p>
 
-<div class="dataset-selector">
+<div class="dataset-selector-container">
   <label for="dataSetSelect">Select Data Set:</label>
   <select id="dataSetSelect" (change)="onDataSetChange($any($event.target).value)">
     <option *ngFor="let dataSet of dataSets" [value]="dataSet.id">{{ dataSet.displayName }}</option>
   </select>
 </div>
 
-<div class="grouping-selector">
+<div class="grouping-selector-container">
   <label for="groupingSelect">Select Grouping:</label>
   <select id="groupingSelect" (change)="onGroupingChange($any($event.target).value)">
     <option *ngFor="let grouping of groupings" [value]="grouping.id">{{ grouping.displayName }}</option>
