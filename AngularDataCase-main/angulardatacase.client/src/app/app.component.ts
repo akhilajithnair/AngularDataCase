@@ -209,7 +209,7 @@ export class AppComponent implements OnInit {
     this.iterationCount++;
     if (this.iterationCount == this.selectedAnalytic.length) {
       this.nodeAnalyticData = Array.from(map.values());
-      console.log('evaluate()', this.nodeAnalyticData);
+      // console.log('evaluate()', this.nodeAnalyticData);
     }
   }
 
