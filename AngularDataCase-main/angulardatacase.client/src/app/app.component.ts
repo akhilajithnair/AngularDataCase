@@ -40,7 +40,7 @@ interface AnalyticData {
 interface NodeAnalyticData {
   id: string;
   displayName: string;
-  analyticData: {[id: string]: number};
+  analyticData: { [id: string]: number };
 }
 
 @Component({
@@ -50,6 +50,8 @@ interface NodeAnalyticData {
   styleUrl: './app.component.css',
 })
 export class AppComponent implements OnInit {
+  iterationCount = 0;
+
   public selectedDataSet: DataSetResponse | null = null;
   public dataSets: DataSetResponse[] = [];
 
@@ -160,16 +162,16 @@ export class AppComponent implements OnInit {
   }
 
   calculate() {
-
     let map = new Map<string, NodeAnalyticData>();
-      this.groupingNodes.forEach((node) => {
-        map.set(node.id, {
-          id: node.id,
-          displayName: node.displayName,
-          analyticData: {},
-        });
-      });
 
+    this.groupingNodes.forEach((node) => {
+      map.set(node.id, {
+        id: node.id,
+        displayName: node.displayName,
+        analyticData: {},
+      });
+    });
+    this.iterationCount = 0;
     this.selectedAnalytic.forEach((analytic) => {
       if (!this.selectedGrouping) {
         console.warn('No grouping selected');
@@ -184,7 +186,7 @@ export class AppComponent implements OnInit {
           (result) => {
             this.calculatedAnalytics = result;
             // console.log('calculate()', this.calculatedAnalytics);
-            this.evaluate(map, result);
+            this.evaluate(map, result, analytic);
           },
           (error) => {
             console.error(error);
@@ -193,18 +195,22 @@ export class AppComponent implements OnInit {
     });
   }
 
-  evaluate(map: Map<string, NodeAnalyticData>, result: CalculateNodeResponse[]) {
+  evaluate(
+    map: Map<string, NodeAnalyticData>,
+    result: CalculateNodeResponse[], analytic: AnalyticResponse
+  ) {
     result.forEach((calc) => {
-      if (map.has(calc.id)) {
-        const nodeData = map.get(calc.id);
+      const nodeData = map.get(calc.id);
         if (nodeData) {
-          nodeData.analyticData[calc.id] = calc.result;
+          nodeData.analyticData[analytic.id] = calc.result;
         }
-      }
     });
 
-    this.nodeAnalyticData = Array.from(map.values());
-    console.log('evaluate()', this.nodeAnalyticData);
+    this.iterationCount++;
+    if (this.iterationCount == this.selectedAnalytic.length) {
+      this.nodeAnalyticData = Array.from(map.values());
+      console.log('evaluate()', this.nodeAnalyticData);
+    }
   }
 
   title = 'angulardatacase.client';
