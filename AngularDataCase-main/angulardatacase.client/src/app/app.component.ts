@@ -37,6 +37,12 @@ interface AnalyticData {
   differential: number;
 }
 
+interface NodeAnalyticData {
+  id: string;
+  displayName: string;
+  analyticData: {[id: string]: number};
+}
+
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -56,7 +62,7 @@ export class AppComponent implements OnInit {
   public groupingNodes: NodeResponse[] = [];
   public calculatedAnalytics: CalculateNodeResponse[] = [];
 
-  public results: Result[] = [];
+  public nodeAnalyticData: NodeAnalyticData[] = [];
 
   constructor(private http: HttpClient) {}
 
@@ -145,15 +151,6 @@ export class AppComponent implements OnInit {
         (result) => {
           this.groupingNodes = result;
           // console.log('getNodeNames()', this.groupingNodes);
-
-          this.groupingNodes.forEach((node) => {
-            this.results.push({
-              id: node.id,
-              displayName: node.displayName,
-              data: null,
-            });
-          });
-
           this.calculate();
         },
         (error) => {
@@ -163,6 +160,15 @@ export class AppComponent implements OnInit {
   }
 
   calculate() {
+
+    let map = new Map<string, NodeAnalyticData>();
+      this.groupingNodes.forEach((node) => {
+        map.set(node.id, {
+          id: node.id,
+          displayName: node.displayName,
+          analyticData: {},
+        });
+      });
 
     this.selectedAnalytic.forEach((analytic) => {
       if (!this.selectedGrouping) {
@@ -178,7 +184,7 @@ export class AppComponent implements OnInit {
           (result) => {
             this.calculatedAnalytics = result;
             // console.log('calculate()', this.calculatedAnalytics);
-            this.evaluate(analytic);
+            this.evaluate(map, result);
           },
           (error) => {
             console.error(error);
@@ -187,41 +193,18 @@ export class AppComponent implements OnInit {
     });
   }
 
-  evaluate(analytic: AnalyticResponse) {
-    this.calculatedAnalytics.forEach((calc) => {
-      const result = this.results.find((r) => r.id === calc.id);
-      if (result) {
-
-        switch(analytic.id) {
-          case 'A1':
-            result.data = {
-              x: calc.result,
-              y: 0,
-              differential: 0,
-            };
-            break;
-          case 'A2':
-            result.data = {
-              x: 0,
-              y: calc.result,
-              differential: 0,
-            };
-            break;
-          case 'A3':
-            result.data = {
-              x: 0,
-              y: 0,
-              differential: calc.result,
-            };
-            break;
-          default:
-            console.warn('Unknown analytic type:', this.selectedAnalytic);
-            return;
+  evaluate(map: Map<string, NodeAnalyticData>, result: CalculateNodeResponse[]) {
+    result.forEach((calc) => {
+      if (map.has(calc.id)) {
+        const nodeData = map.get(calc.id);
+        if (nodeData) {
+          nodeData.analyticData[calc.id] = calc.result;
         }
       }
     });
 
-    console.log('evaluate()', this.results);
+    this.nodeAnalyticData = Array.from(map.values());
+    console.log('evaluate()', this.nodeAnalyticData);
   }
 
   title = 'angulardatacase.client';

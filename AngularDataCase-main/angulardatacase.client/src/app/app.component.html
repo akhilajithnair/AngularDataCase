@@ -28,34 +28,22 @@
   </div>
 </div>
 
-Node Names for grouping=SECURITY:
-<table *ngIf="groupingNodes">
-  <thead>
-    <tr>
-      <th>ID</th>
-      <th>DisplayName</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr *ngFor="let groupingNode of groupingNodes">
-      <td>{{ groupingNode.id }}</td>
-      <td>{{ groupingNode.displayName }}</td>
-    </tr>
-  </tbody>
-</table>
-
-Calculation results for Analytic=A1, DataSet=0, grouping=SECURITY:
-<table *ngIf="calculatedAnalytics">
-  <thead>
-    <tr>
-      <th>ID</th>
-      <th>Result</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr *ngFor="let calculatedAnalytic of calculatedAnalytics">
-      <td>{{ calculatedAnalytic.id }}</td>
-      <td>{{ calculatedAnalytic.result }}</td>
-    </tr>
-  </tbody>
-</table>
+<div>
+  <label>Analytics:</label>
+  <table>
+    <thead>
+      <tr>
+        <th>Node</th>
+        <th *ngFor="let analytic of selectedAnalytic">{{ analytic.displayName }}</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let data of nodeAnalyticData">
+        <td>{{ data.displayName }}</td>
+        <td *ngFor="let analytic of selectedAnalytic">
+          {{ data.analyticData[analytic.id] }}
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
